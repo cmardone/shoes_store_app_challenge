@@ -1,6 +1,6 @@
 # shoes_store_app
 
-A new Flutter project.
+A flutter challenge project for [Shoes Store App Design](https://dribbble.com/shots/14045862-Shoes-Store-App-Design/)
 
 ## Getting Started
 
