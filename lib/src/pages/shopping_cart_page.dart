@@ -12,14 +12,84 @@ class ShoppingCartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF1F5F8),
-      body: Container(
-        child: Stack(
-          children: [
-            ShoppingCartHeader(),
-            _ShoppingCartList(),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ShoppingCartHeader(),
+              _ShoppingCartList(),
+              _ShoppingCartSummary(),
+              _ShoppingCartCheckout()
+            ],
+          ),
+          physics: BouncingScrollPhysics(),
         ),
       ),
+    );
+  }
+}
+
+class _ShoppingCartCheckout extends StatelessWidget {
+  const _ShoppingCartCheckout({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Proceed to checkout',
+          style: TextStyle(
+              color: Color(0xFFF1F5F8),
+              fontFamily: kAppFontFamily,
+              fontSize: 20,
+              fontWeight: FontWeight.bold),
+        ),
+        decoration: BoxDecoration(
+          color: kAppBackgroundColor,
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+        ),
+        height: 70,
+        margin: EdgeInsets.only(bottom: 20, left: 20, right: 20),
+        width: double.infinity,
+      ),
+      onPressed: () {},
+    );
+  }
+}
+
+class _ShoppingCartSummary extends StatelessWidget {
+  const _ShoppingCartSummary({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Total',
+            style: TextStyle(
+              fontFamily: kAppFontFamily,
+              fontSize: 24,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          Text(
+            '\$${shoes.fold<double>(0, (t, e) => t + e.price).toStringAsFixed(2)}',
+            style: TextStyle(
+              fontFamily: kAppFontFamily,
+              fontSize: 26,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+        ],
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 35),
     );
   }
 }
@@ -27,15 +97,13 @@ class ShoppingCartPage extends StatelessWidget {
 class _ShoppingCartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        margin: EdgeInsets.only(top: 120),
-        child: ListView.builder(
-          itemCount: shoes.length,
-          itemBuilder: (context, index) => _ShoppingCartItem(shoes[index]),
-          physics: BouncingScrollPhysics(),
-          scrollDirection: Axis.vertical,
-        ),
+    return Container(
+      child: ListView.builder(
+        itemCount: shoes.length,
+        itemBuilder: (context, index) => _ShoppingCartItem(shoes[index]),
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
       ),
     );
   }
@@ -50,7 +118,7 @@ class _ShoppingCartItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final double horizontalMargin = 20;
     final double verticalMargin = 10;
-    final double height = 140.0;
+    final double height = 130.0;
     return Stack(children: [
       _ShoppingCartItemBackground(
         horizontalMargin: horizontalMargin,
@@ -59,6 +127,7 @@ class _ShoppingCartItem extends StatelessWidget {
       ),
       _ShoppingCartItemCard(
         this.shoeItem,
+        height: height,
         verticalMargin: verticalMargin,
       ),
     ]);
@@ -220,7 +289,7 @@ class _ShoppingCartItemBackground extends StatelessWidget {
         color: kAppBackgroundColor,
         boxShadow: [
           new BoxShadow(
-            color: Colors.black54,
+            color: Colors.black26,
             blurRadius: verticalMargin,
           ),
         ],
@@ -235,33 +304,3 @@ class _ShoppingCartItemBackground extends StatelessWidget {
     );
   }
 }
-
-// class _ShoppingCartItemDismiss extends StatelessWidget {
-//   const _ShoppingCartItemDismiss({
-//     Key key,
-//     @required this.horizontalPadding,
-//   }) : super(key: key);
-
-//   final double horizontalPadding;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       alignment: Alignment.centerRight,
-//       child: RawMaterialButton(
-//         onPressed: () {},
-//         shape: CircleBorder(),
-//         padding: EdgeInsets.all(15),
-//         child: Icon(Icons.delete_outline, size: 36, color: Colors.red),
-//       ),
-//       decoration: BoxDecoration(
-//         color: kAppBackgroundColor,
-//         borderRadius: BorderRadius.all(Radius.circular(15)),
-//       ),
-//       height: 140,
-//       width: double.infinity,
-//       margin:
-//           EdgeInsets.symmetric(vertical: 12.5, horizontal: horizontalPadding),
-//     );
-//   }
-// }

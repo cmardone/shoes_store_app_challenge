@@ -6,14 +6,13 @@ import 'package:shoes_store_app/src/themes/app_theme.dart';
 class ShoppingCartHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(children: <Widget>[
-          _PageHeaderActionLeft(),
-          _PageHeaderActionRight(),
-          _PageHeaderTitle()
-        ]),
-      ),
+    return Container(
+      height: 120,
+      child: Stack(children: <Widget>[
+        _PageHeaderActionLeft(),
+        _PageHeaderActionRight(),
+        _PageHeaderTitle()
+      ]),
     );
   }
 }
