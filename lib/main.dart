@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shoes_store_app/src/pages/shoes_list_page.dart';
+
+import 'package:shoes_store_app/src/pages/shopping_cart_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ShoesListPage(),
+      home: ShoppingCartPage(),
       title: 'Shoes Store App',
     );
   }

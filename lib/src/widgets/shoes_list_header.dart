@@ -4,9 +4,7 @@ import 'package:shoes_store_app/src/models/menu_item.dart';
 import 'package:shoes_store_app/src/themes/app_theme.dart';
 import 'package:shoes_store_app/src/widgets/horizontal_menu.dart';
 
-class PageHeader extends StatelessWidget {
-  const PageHeader({Key key}) : super(key: key);
-
+class ShoesListHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [

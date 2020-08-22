@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shoes_store_app/src/models/shoe_item.dart';
 import 'package:shoes_store_app/src/themes/app_theme.dart';
 
-import 'package:shoes_store_app/src/widgets/page_header.dart';
+import 'package:shoes_store_app/src/widgets/shoes_list_header.dart';
 
 class ShoesListPage extends StatelessWidget {
   @override
@@ -13,7 +13,7 @@ class ShoesListPage extends StatelessWidget {
           width: double.infinity,
           child: Stack(
             children: [
-              PageHeader(),
+              ShoesListHeader(),
               ShoesList(),
             ],
           ),
@@ -26,7 +26,6 @@ class ShoesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        //color: Colors.yellowAccent.withOpacity(0.5),
         margin: EdgeInsets.only(top: 135),
         child: ListView.builder(
           itemBuilder: (context, index) {
