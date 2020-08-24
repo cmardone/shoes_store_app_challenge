@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:shoes_store_app/src/models/shoe_item.dart';
-import 'package:shoes_store_app/src/themes/app_theme.dart';
+import 'package:provider/provider.dart';
 
+import 'package:shoes_store_app/src/models/shoe_item.dart';
+import 'package:shoes_store_app/src/models/shoes_list_provider.dart';
+import 'package:shoes_store_app/src/themes/app_theme.dart';
+import 'package:shoes_store_app/src/widgets/shoes_list_filter.dart';
 import 'package:shoes_store_app/src/widgets/shoes_list_header.dart';
 
 class ShoesListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider(
+      create: (_) => ShoesListProvider(),
+      child: Scaffold(
         backgroundColor: Color(0xFFF1F5F8),
         body: Container(
           width: double.infinity,
-          child: Stack(
-            children: [
-              ShoesListHeader(),
-              ShoesList(),
-            ],
-          ),
-        ));
+          child: Builder(builder: (context) {
+            final provider = Provider.of<ShoesListProvider>(context);
+            return Stack(
+              children: [
+                ShoesListHeader(),
+                provider.isFilterOpen ? Container() : ShoesList(),
+                provider.isFilterOpen ? ShoesListFilter() : Container(),
+              ],
+            );
+          }),
+        ),
+      ),
+    );
   }
 }
 

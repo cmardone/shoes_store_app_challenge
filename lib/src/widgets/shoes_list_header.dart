@@ -1,27 +1,28 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 import 'package:shoes_store_app/src/models/menu_item.dart';
+import 'package:shoes_store_app/src/models/shoes_list_provider.dart';
 import 'package:shoes_store_app/src/themes/app_theme.dart';
 import 'package:shoes_store_app/src/widgets/horizontal_menu.dart';
 
 class ShoesListHeader extends StatelessWidget {
-  final bool isDark;
-
-  const ShoesListHeader({this.isDark = true});
+  final bool isDark = true;
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ShoesListProvider>(context);
     return Stack(children: [
-      _PageHeaderBackground(isDark),
-      _PageHeaderActionLeft(isDark),
-      _PageHeaderActionRight(isDark),
-      _PageHeaderStripes(isDark),
+      _PageHeaderBackground(provider.isDark),
+      _PageHeaderActionLeft(provider.isDark),
+      _PageHeaderActionRight(provider.isDark),
+      _PageHeaderStripes(provider.isDark),
       Positioned(
         top: 120,
         child: HorizontalMenu(
-          isDark: isDark,
+          isDark: provider.isDark,
           items: <MenuItem>[
             MenuItem(title: 'Men Shoes', selected: true),
             MenuItem(title: 'Women Shoes'),
@@ -95,6 +96,7 @@ class _PageHeaderActionRight extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ShoesListProvider>(context);
     return Positioned(
       top: 60,
       right: -15,
@@ -104,7 +106,9 @@ class _PageHeaderActionRight extends StatelessWidget {
           color: isDark ? kAppForegroundColor : kAppBackgroundColor,
           size: kAppLargeIconSize,
         ),
-        onPressed: () {},
+        onPressed: () {
+          provider.isFilterOpen = !provider.isFilterOpen;
+        },
         padding: EdgeInsets.all(15),
         shape: CircleBorder(),
       ),
