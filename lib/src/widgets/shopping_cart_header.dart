@@ -48,7 +48,9 @@ class _PageHeaderActionLeft extends StatelessWidget {
           color: kAppBackgroundColor,
           size: kAppLargeIconSize,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pop(context);
+        },
         padding: EdgeInsets.all(15),
         shape: CircleBorder(),
       ),

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:shoes_store_app/src/models/shoe_item.dart';
 import 'package:shoes_store_app/src/models/shoes_list_provider.dart';
+import 'package:shoes_store_app/src/pages/shopping_cart_page.dart';
 import 'package:shoes_store_app/src/themes/app_theme.dart';
 import 'package:shoes_store_app/src/widgets/shoes_list_filter.dart';
 import 'package:shoes_store_app/src/widgets/shoes_list_header.dart';
@@ -22,7 +23,7 @@ class ShoesListPage extends StatelessWidget {
               children: [
                 ShoesListHeader(),
                 provider.isFilterOpen ? Container() : ShoesList(),
-                provider.isFilterOpen ? ShoesListFilter() : Container(),
+                ShoesListFilter(),
               ],
             );
           }),
@@ -166,7 +167,8 @@ class _ShoeItemCardAction extends StatelessWidget {
       child: RawMaterialButton(
         child:
             Icon(shoeItem.isFavorite ? Icons.favorite : Icons.favorite_border),
-        onPressed: () => print('click favorite'),
+        onPressed: () => Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ShoppingCartPage())),
         shape: CircleBorder(),
       ),
     );
